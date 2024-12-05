@@ -27,6 +27,7 @@ app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.engine("ejs",ejsMate);
+app.use(express.static(path.join(__dirname,"/public")));
 
 app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs");
@@ -58,7 +59,7 @@ app.put("/listings/:id",async(req,res)=>{
     const editListing = {
         title: title,
         description: description,
-        image: image,
+        Image: Image,
         price: price,
         location: location,
         country: country,
@@ -79,7 +80,7 @@ app.post("/listings",async(req,res)=>{
     const newListing = {
         title: title,
         description: description,
-        image: image,
+        Image: Image,
         price: price,
         location: location,
         country: country,

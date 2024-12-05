@@ -1,20 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>new entry</title>
-</head>
-<body>
+<%layout("/layouts/boilerplate.ejs")%>
+
+<div class="row">
+    <div class="col-8 offset-2">
+
+<!-- offset overhere is used to add empty space from the left to adjust the element -->
+
     <h1>create a new listing</h1>
     <form method="post" action="/listings">
-        <input type="text" name="title" placeholder="enter title"><br>
-        <input name="description" type="text" placeholder="enter description"><br>
-        <input type="text" name="image" placeholder="enter URL link"><br>
-        <input type="number" name="price" placeholder="enter amount"><br>
-        <input type="text" name="location" placeholder="enter location"><br>
-        <input type="text" name="country" placeholder="enter country"><br>
-        <button>add</button>
+
+        <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" placeholder="enter title" class="form-control">
+        </div>
+
+        <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" type="text" placeholder="enter description" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+        <label for="image" class="form-label" >Image URL</label>
+        <input type="text" name="image" placeholder="enter URL link" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label" >Price</label>
+            <input type="number" name="price" placeholder="enter amount" class="form-control">
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+            <label for="location" class="form-label" >Location</label>
+            <input type="text" name="location" placeholder="enter location" class="form-control">
+        </div>
+
+        <div class="mb-3 col-md-8">
+            <label for="country" class="form-label" >Country</label>
+            <input type="text" name="country" placeholder="enter country" class="form-control">
+        </div>
+        </div>
+
+        <button class="btn-new">add</button>
+        <br><br>
     </form>
-</body>
-</html>
+    </div>
+</div>
