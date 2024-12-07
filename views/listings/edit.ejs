@@ -1,38 +1,49 @@
 <%layout("/layouts/boilerplate.ejs")%>
 
     <h1>Edit your listing</h1>
-    <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
+    <form method="post" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
         <div class="row">
-            <div class="col-8 offset-2"></div>
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" value="<%=listing.title%>" class="form-control">
+            <input type="text" name="title" value="<%=listing.title%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="description" name="description" value="<%=listing.description%>" class="form-control">
+            <input type="description" name="description" value="<%=listing.description%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
 
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" name="image" value="<%=listing.image%>" class="form-control">
+            <input type="text" name="image" value="<%=listing.Image%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" name="price" value="<%=listing.price%>" class="form-control">
+            <input type="number" name="price" value="<%=listing.price%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
 
         <div class="row">
         <div class="mb-3 col-md-4">
             <label for="location" class="form-label">Location</label>
-            <input type="text" name="location" value="<%=listing.location%>" class="form-control">
+            <input type="text" name="location" value="<%=listing.location%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
 
         <div class="mb-3 col-md-4">
             <label for="country" class="form-label">Country</label>
-            <input type="text" name="country" value="<%=listing.country%>" class="form-control"><br>
+            <input type="text" name="country" value="<%=listing.country%>" class="form-control" required>
+            <div class="valid-feedback">Correct</div>
+            <div class="invalid-feedback">Please enter valid title</div>
         </div>
         </div>
         </div>
@@ -41,3 +52,5 @@
         <br>
         
     </form>
+
+    <!-- <script src="../../public/javascript/script.js"></script> -->

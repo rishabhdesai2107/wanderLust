@@ -55,7 +55,7 @@ app.get("/listings/:id/edit",async(req,res)=>{
 
 app.put("/listings/:id",async(req,res)=>{
     let {id} = req.params;
-    const {title,description,image,price,country,location} = req.body;
+    const {title,description,Image,price,country,location} = req.body;
     const editListing = {
         title: title,
         description: description,
@@ -76,7 +76,7 @@ app.delete("/listings/:id",async(req,res)=>{
 })
 
 app.post("/listings",async(req,res)=>{
-    const {title,description,image,price,country,location} = req.body;
+    const {title,description,Image,price,country,location} = req.body;
     const newListing = {
         title: title,
         description: description,
