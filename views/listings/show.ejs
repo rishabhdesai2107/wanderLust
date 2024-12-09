@@ -27,6 +27,41 @@
           <br><br>
           </form>
       </div>
+      <hr>
+
+      <form method="post" action="/listings/<%=listing._id%>/reviews" novalidate class="needs-validation">
+        <div class="mb-3 mt-3">
+          <label for="rating" class="form-label">Rating</label>
+          <input type="range" min="1" max="5" id="rating" name="review[rating]">
+        </div>
+        <div>
+          <label for="comment" class="form-label">Comment</label>
+          <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+          <div class="invalid-feedback">Please enter valid details.</div>
+          <br>
+        </div>
+        <button class="btn btn-outline-dark">Submit</button>
+        <br>
+      </form>
+      <br>
+      <hr>
+
     </div>
+    <h4>All reviews</h4>
+    <ul>
+      <div class="row">
+      <% for(let review of listing.reviews) { %>
+        <div class="card card-rev ms-3 col-5 mb-3">
+          <div class="card-body">
+            <h5 class="card-text"><%=review.comment%></h5>
+            <h5 class="card-text"><%=review.rating%></h5>
+          </div>
+          <form method="post" action="/listings/<%=listing._id%>/reviews/<%= review._id %>?_method=DELETE" class="mb-3">
+            <button class="btn btn-sm btn-dark">Delete</button>
+          </form>
+        </div>
+        <% } %>
+        </ul>
+      </div>
   </div>
 </div>

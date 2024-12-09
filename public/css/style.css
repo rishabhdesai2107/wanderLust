@@ -126,3 +126,7 @@ body{
 .delbtn:hover{
     opacity: 0.4;
 }
+
+.card-rev{
+    border: 2px solid black !important;
+}
