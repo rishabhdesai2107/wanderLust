@@ -9,6 +9,8 @@
       <div class="card" style="width: 50rem;">
         <img src="<%=listing.Image%> " class="card-img-top show-image" alt="listing_image">
         <div class="card-body">
+          <p class="card-text">Owned by <i><%=listing.owner.username%></i></p>
+
           <p class="card-text"><%=listing.title%></p>
 
           <p class="card-text"><%=listing.description%></p>
@@ -18,8 +20,10 @@
           <p class="card-text"><%=listing.location%></p>
 
           <p class="card-text"><%=listing.country%></p>
-
         </div>
+
+        <% if(currUser && listing.owner._id.equals(currUser._id)){ %>
+
         <a href="/listings/<%=listing._id%>/edit" class="editbtn">Edit</a>
         <br>
           <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
@@ -28,7 +32,9 @@
           </form>
       </div>
       <hr>
+      <% } %>
 
+      <% if(currUser) {%>
       <form method="post" action="/listings/<%=listing._id%>/reviews" novalidate class="needs-validation">
         <div class="mb-3 mt-3">
           <label for="rating" class="form-label">Rating</label>
@@ -43,25 +49,25 @@
         <button class="btn btn-outline-dark">Submit</button>
         <br>
       </form>
+      <% } %>
       <br>
       <hr>
 
     </div>
     <h4>All reviews</h4>
-    <ul>
       <div class="row">
       <% for(let review of listing.reviews) { %>
         <div class="card card-rev ms-3 col-5 mb-3">
           <div class="card-body">
-            <h5 class="card-text"><%=review.comment%></h5>
-            <h5 class="card-text"><%=review.rating%></h5>
+            <h5 class="card-title">@<%=review.author.username%></h5>
+            <p class="card-text"><%=review.comment%></p>
+            <p class="card-text"><%=review.rating%></p>
           </div>
           <form method="post" action="/listings/<%=listing._id%>/reviews/<%= review._id %>?_method=DELETE" class="mb-3">
             <button class="btn btn-sm btn-dark">Delete</button>
           </form>
         </div>
         <% } %>
-        </ul>
       </div>
   </div>
 </div>
