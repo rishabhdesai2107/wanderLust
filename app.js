@@ -75,7 +75,7 @@ app.get("/listings/new",(req,res)=>{
 
 app.get("/listings/:id",wrapAsync(async(req,res)=>{
     const {id} = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show",{listing});
 }));
 
@@ -114,9 +114,15 @@ app.post("/listings/:id/reviews",ValidateReview,wrapAsync(async(req,res)=>{
     await newReview.save();
     await listing.save();
     console.log("new review saved");
-    res.redirect('/listings/${listing._id}');
+    res.redirect(`/listings/${listing._id}`);
 }));
 
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
+    let {id,reviewId} = req.params;
+    await Listing.findByIdAndUpdate(id,{$pull: {reviews:reviewId}}) //will also trigger the post mongoose middleware that we have defined in the listing schema.
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+}));
 
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"page not found!"));
