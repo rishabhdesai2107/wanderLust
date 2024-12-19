@@ -68,6 +68,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 })
 
@@ -76,7 +77,7 @@ app.get("/demouser",async(req,res)=>{
         email: "student@gmail.com",
         username: "delta-student"
 });
-let registeredUser = await User.register(fakeUser,"helloworld"); //helloworld is the pasword here.
+let registeredUser = await User.register(fakeUser,"helloworld"); //helloworld is the password here.
 res.send(registeredUser);
 })
 
