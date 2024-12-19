@@ -36,11 +36,9 @@ router.get("/:id",wrapAsync(async(req,res)=>{
 }));
 
 router.post("/",ValidateListing,wrapAsync(async(req,res,next)=>{
-    if(!req.body.listing){
-        throw ExpressError(400,"send valid data for listing");
-    }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success","new listing created");
     res.redirect("/listings");
     }
 ))
