@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router({mergeParams: true});
 const wrapAsync = require("../utils/wrapAsync.js");
-const {reviewSchema} = require("../schema.js");
-const ExpressError = require("../utils/ExpressError.js");
-const Listing = require("../models/listing.js");
-const Review = require("../models/review.js");
 const User = require("../models/user.js");
+const passport = require("passport");
+
 
 router.get("/signup",(req,res)=>{
     res.render("users/signup");
@@ -22,8 +20,28 @@ router.post("/signup",wrapAsync(async(req,res)=>{
         req.flash("error",error.message);
         res.redirect("/signup");
     }
-    
+
 }));
+
+router.get("/login",(req,res)=>{
+    res.render("users/login");
+})
+
+router.post("/login",passport.authenticate("local",{failureRedirect:'/login',failureFlash:true}),wrapAsync(async(req,res)=>{
+    req.flash("success","welcome to wanderlust you are logged in");
+    res.redirect("/listings")
+;})); //authentication
+
+router.get("/logout",(req,res,next)=>{
+    req.logOut((err)=>{
+        if(err){
+            return next(err);
+        }
+        req.flash("success","you are logged out now");
+        res.redirect("/listings");
+    });
+})
+
 
 
 

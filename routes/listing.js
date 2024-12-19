@@ -4,6 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const {listingSchema} = require("../schema.js");
 const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing.js");
+const {isLoggedIn} = require("../middleware.js");
 
 
 
@@ -25,7 +26,7 @@ router.get("/", wrapAsync(async (req, res) => {
     res.render("listings/index", { allListings });
 }));
 
-router.get("/new",(req,res)=>{
+router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listings/new");
 });
 
@@ -34,12 +35,12 @@ router.get("/:id",wrapAsync(async(req,res)=>{
     const listing = await Listing.findById(id).populate("reviews");
     if(!listing){
         req.flash("error","The listing you are trying to access doesn't exist");
-        res.redirect("/listings");
+    res.redirect("/listings");
     }
     res.render("listings/show",{listing});
 }));
 
-router.post("/",ValidateListing,wrapAsync(async(req,res,next)=>{
+router.post("/",ValidateListing,isLoggedIn,wrapAsync(async(req,res,next)=>{
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     req.flash("success","New listing created");
@@ -47,16 +48,16 @@ router.post("/",ValidateListing,wrapAsync(async(req,res,next)=>{
     }
 ))
 
-router.get("/:id/edit",wrapAsync(async(req,res)=>{
+router.get("/:id/edit",isLoggedIn,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit",{listing});
 }));
 
-router.put("/:id",ValidateListing,wrapAsync(async(req,res)=>{
+router.put("/:id",isLoggedIn,ValidateListing,wrapAsync(async(req,res)=>{
     const {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    if(!listing){
+    if(!Listing){
         req.flash("error","The listing you are trying to access doesn't exist");
         res.redirect("/listings");
     }
