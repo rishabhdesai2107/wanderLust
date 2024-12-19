@@ -19,6 +19,7 @@ module.exports.saveRedirectUrl = (req,res,next)=>{
     next();
 }
 
+//Authorization - listings
 module.exports.isOwner = async(req,res,next)=>{
     let{id} = req.params;
     let listing = await Listing.findById(id);
@@ -30,7 +31,7 @@ module.exports.isOwner = async(req,res,next)=>{
 }
 
 
-//schema validation using joi
+//schema validation using joi - for listings - form
 module.exports.ValidateListing = (req, res, next) => {
     let { error } = listingSchema.validate(req.body); // Schema validation
     if (error) {
@@ -41,7 +42,7 @@ module.exports.ValidateListing = (req, res, next) => {
     }
 };
 
-
+//schema validation using joi - for reviews - form
 module.exports.ValidateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body); // Schema validation
     if (error) {
@@ -51,3 +52,14 @@ module.exports.ValidateReview = (req, res, next) => {
         next();
     }
 };
+
+
+module.exports.isReviewAuthor = async(req,res,next)=>{
+    let{id,reviewId} = req.params;
+    let review = await Review.findById(reviewId);
+    if(!review.author.equals(res.locals.currUser._id)){
+        req.flash("error","You don't have the permission to edit");
+        return res.redirect(`/listings/${id}`)
+    }
+    next();
+}
