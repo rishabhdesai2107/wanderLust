@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-8 offset-2">
         <h1>new listing</h1>
-    <form action="/listings" method="post"novalidate class="needs-validation">
+    <form action="/listings" method="post"novalidate class="needs-validation" enctype="multipart/form-data">
+        <!-- enctype overhere is use so that we can send a file to the backend for storage -->
         <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" name="listing[title]" placeholder="enter title" id="title" class="form-control" required>
@@ -20,8 +21,8 @@
         <br>
 
         <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input type="text" name="listing[image]" placeholder="image" id="image" class="form-control" required>
+        <label for="image" class="form-label">Upload Listing Image</label>
+        <input type="file" name="listing[image]" id="image" class="form-control" required>
         <div class="invalid-feedback">Please enter a URL</div>
         <div class="valid-feedback">URL looks good</div>
         </div>
