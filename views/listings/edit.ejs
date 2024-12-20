@@ -3,7 +3,7 @@
     <div class="col-8 offset-2">
 
     <h1>edit route</h1>
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="post" novalidate class="needs-validation">
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="listing[title]" value="<%=listing.title%>" class="form-control" required>
@@ -22,8 +22,8 @@
         <br>
 
         <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input type="text" name="listing[image]" value="<%=listing.image%>" class="form-control" required>
+        <label for="image" class="form-label">Upload new image</label>
+        <input type="file" name="listing[image]" class="form-control" required>
         <div class="invalid-feedback">Please enter a URL</div>
         <div class="valid-feedback">URL looks good</div>
         </div>
