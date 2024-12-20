@@ -6,3 +6,4 @@ ejs-mate is a package that we use to implement boilerplate for other ejs templat
 multer is a package that we use for parsing the multipart/form-data for uploading in the form and sending files to the server.
 cloudinary is a third party app that is used to store the large data. We have used it for storing the image file that is sent after filling the new listing form.
 dotenv is a package that is used to make the environment variables stored in .env file globallly accessible.
+npm i cloudinary multer-storage-cloudinary is the package that is used to use multer with cloudinary.
