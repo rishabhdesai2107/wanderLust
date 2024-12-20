@@ -5,21 +5,23 @@ const {isLoggedIn, isOwner, ValidateListing} = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 
 
+router.route("/") //router.route is used when several http methods in API have same route.
+.get(wrapAsync(listingController.index))
+.post(ValidateListing,isLoggedIn,wrapAsync(listingController.createListing));
 
-
-router.get("/", wrapAsync(listingController.index));
 
 router.get("/new",isLoggedIn,listingController.rendernewForm);
 
-router.get("/:id",wrapAsync(listingController.showListing));
 
-router.post("/",ValidateListing,isLoggedIn,wrapAsync(listingController.createListing));
+router.route("/:id")
+.get(wrapAsync(listingController.showListing))
+.put(isLoggedIn,isOwner,ValidateListing,wrapAsync(listingController.updateListing))
+.delete(isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
+
 
 router.get("/:id/edit",isLoggedIn,wrapAsync(listingController.renderEditForm));
 
-router.put("/:id",isLoggedIn,isOwner,ValidateListing,wrapAsync(listingController.updateListing));
 
-router.delete("/:id",isLoggedIn,isOwner,wrapAsync(listingController.destroyListing));
 
 
 module.exports = router;
