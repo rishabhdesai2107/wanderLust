@@ -4,7 +4,7 @@
         <h1><%= listing.title %></h1>
 </div>
     
-<div class="card col-6 offset-3 show-card">
+<div class="card col-6 offset-3 show-card mb-2">
     <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
     <div class="card-body"><br>
         <p class="card-text">
@@ -22,7 +22,7 @@
 <br>
 
 <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
-<div class="btns">
+<div class="btns mb-5">
         <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark col-1 offset-3">Edit</a>
 
         <form action="/listings/<%=listing._id%>?_method=DELETE" method="post">
@@ -30,6 +30,7 @@
     </form>
     </div>
 <% } %>
+<br>
     <hr>
 
 
@@ -64,11 +65,12 @@
             </div>
             <button class="btn btn-outline-dark">Submit</button>
         </form>
+        <br>
         <hr>
         <% } %>
 
 
-        <p><b>All reviews</b></p>
+        <h3><b>All reviews</b></h3>
         <div class="row">
         <% for(let review of listing.reviews){ %>
                 <div class="card col-5 ms-3 mb-3">

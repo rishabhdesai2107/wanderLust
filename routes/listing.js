@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const {isLoggedIn, isOwner, ValidateListing} = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 const multer = require("multer"); //for parsing the multipart/form-data for uploading in the form and sending files to the server.
-const {storage,cloudinary} = require("../cloudConfig.js");
+const {storage} = require("../cloudConfig.js");
 const upload = multer({storage}) //files will be saved in this storage of cloudinary
 
 

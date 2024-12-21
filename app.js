@@ -55,10 +55,6 @@ const sessionOptions = {
     }
 };
 
-app.get("/", (req, res) => {
-    res.send("Hi there! I am going to get selected in the interview.");
-});
-
 
 app.use(session(sessionOptions));
 app.use(flash());
